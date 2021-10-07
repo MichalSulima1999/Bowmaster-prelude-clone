@@ -16,6 +16,8 @@ TagManager:
   - EnemyUnit
   - FriendlyFlagFollowSpot
   - EnemyFlagFollowSpot
+  - PlayerBase
+  - Head
   layers:
   - Default
   - TransparentFX
@@ -61,4 +63,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3433998729
+    locked: 0
+  - name: Character
+    uniqueID: 187854353
     locked: 0

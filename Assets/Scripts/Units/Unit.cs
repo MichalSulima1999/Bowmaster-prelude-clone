@@ -9,16 +9,16 @@ public abstract class Unit : MonoBehaviour {
     protected bool dead;
     protected Animator animator;
     protected Rigidbody2D rbody;
-    protected Collider2D unitCollider;
+    protected CapsuleCollider2D cc;
 
     protected int currentHp;
-    private float attackTimeCounter;
-    RaycastHit2D hitEnemy;
+    protected float attackTimeCounter;
 
     private GameObject followedFlag;
     private Flag flagScript;
-    private Transform followSpot;
+    protected Transform followSpot;
 
+    public bool onSlope { get; set; }
     public bool hasFlag { get; set; } = false;
 
     [SerializeField] protected int maxHp = 100;
@@ -31,6 +31,7 @@ public abstract class Unit : MonoBehaviour {
     [SerializeField] protected bool enemy;
     [SerializeField] protected LayerMask friendlyLayer;
     [SerializeField] protected LayerMask enemyLayer;
+    [SerializeField] protected LayerMask groundLayer;
 
     [Header("UI")]
     [SerializeField] private Image hpImage;
@@ -39,8 +40,8 @@ public abstract class Unit : MonoBehaviour {
     void Start() {
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
+        cc = GetComponent<CapsuleCollider2D>();
 
-        unitCollider = GetComponent<Collider2D>();
         currentHp = maxHp;
 
         if (enemy) {
@@ -63,7 +64,16 @@ public abstract class Unit : MonoBehaviour {
 
         hpImage.fillAmount = (float)currentHp / (float)maxHp;
 
-        LookAtFlag();
+        if (!attacking) {
+            if (!hasFlag)
+                LookAtTarget(followSpot);
+
+            if (hasFlag && enemy)
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z));
+
+            if (hasFlag && !enemy)
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 180, transform.rotation.eulerAngles.z));
+        }
     }
 
     private void SetFollowSpot() {
@@ -78,53 +88,42 @@ public abstract class Unit : MonoBehaviour {
         moving = true;
         attacking = false;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + (transform.right + transform.up) * 0.1f, -Vector2.up, 2f, ~friendlyLayer);
-        Debug.DrawRay(transform.position + (transform.right + transform.up) * 0.1f, -Vector2.up, Color.white, 2f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 2f, groundLayer);
+        Debug.DrawRay(transform.position, -Vector2.up, Color.white, 2f);
+
+
         if (hit.collider != null) {
+            Debug.Log("hit");
             var slope = hit.normal;
-            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            var targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 0.1f);
         }
 
+
+
         rbody.velocity = transform.right * moveSpeed;
+
+
     }
 
     public void Stay() {
         moving = false;
-        attacking = false;
         rbody.velocity = Vector2.zero;
     }
 
-    void CheckForEnemy() {
-        hitEnemy = Physics2D.Raycast(transform.position + new Vector3(0, 0.2f, 0), transform.right, attackRange, enemyLayer);
-
-        if (hitEnemy.collider != null) {
-            Debug.DrawRay(transform.position + new Vector3(0, 0.2f, 0), transform.right, Color.red, attackRange);
-            if (attackTimeCounter <= 0) {
-                Attack();
-                attackTimeCounter = timeBetweenAttacks;
-            } else {
-                Stay();
-            }
-        } else {
-            if(Vector3.Distance(transform.position, followSpot.position) > maxDistanceFromFlag)
-                Move();
-            else
-                rbody.velocity = Vector2.zero;
-        }
-    }
+    public abstract void CheckForEnemy();
 
     public void Attack() {
         moving = false;
         attacking = true;
 
+        animator.Play("Attack");
         rbody.velocity = Vector2.zero;
     }
 
-    public void HitMoment() {
-        AttackUnit(hitEnemy.collider.gameObject);
-    }
-
     public abstract void AttackUnit(GameObject unit);
+
+    public abstract void AttackMoment();
 
     public void Die() {
         moving = false;
@@ -146,7 +145,7 @@ public abstract class Unit : MonoBehaviour {
     public void PassVarToAnimator() {
         animator.SetBool("Moving", moving);
         animator.SetBool("Dead", dead);
-        animator.SetBool("Attacking", attacking);
+        //animator.SetBool("Attacking", attacking);
     }
 
     public void TakeDamage(int amount) {
@@ -162,16 +161,16 @@ public abstract class Unit : MonoBehaviour {
         moveSpeed /= 2;
     }
 
-    public void LookAtFlag() {
-        if (hasFlag)
-            return;
+    public void PutFlag() {
+        moveSpeed *= 2;
+    }
 
-        if (transform.position.x > followSpot.position.x) {
+    public void LookAtTarget(Transform target) {
+        if (transform.position.x > target.position.x) {
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 180, transform.rotation.eulerAngles.z));
         } else {
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z));
         }
-
     }
 
     private void OnDrawGizmos() {

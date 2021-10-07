@@ -128,9 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e29ed212e59674284190425c843336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 14
+  speedMultiplier: 10
   damageToUnits: 25
   damageToBuildings: 5
+  criticalMultiplier: 2
+  criticalEffect: {fileID: 8965844519532540756, guid: 9606ab80c83197e4fbf0be485b0c6778, type: 3}
 --- !u!50 &8149349374015133266
 Rigidbody2D:
   serializedVersion: 4

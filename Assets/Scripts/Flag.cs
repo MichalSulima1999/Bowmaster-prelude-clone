@@ -39,6 +39,7 @@ public class Flag : MonoBehaviour {
         transform.position = startingPoint;
         carrier = null;
         carrierUnit.hasFlag = false;
+        carrierUnit.PutFlag();
     }
 
     public bool HasCarrier() {

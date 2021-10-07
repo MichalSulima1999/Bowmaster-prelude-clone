@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyBase : MonoBehaviour
+public class Castle : MonoBehaviour
 {
     [SerializeField] private int maxHP = 10000;
     [SerializeField] private Image hpImage;

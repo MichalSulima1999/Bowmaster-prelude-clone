@@ -12,6 +12,9 @@ public abstract class Arrow : MonoBehaviour
     [SerializeField] protected int damageToUnits = 25;
     [SerializeField] protected int damageToBuildings = 5;
 
+    [SerializeField] protected int criticalMultiplier = 2;
+    [SerializeField] protected GameObject criticalEffect;
+
     public float speed { get; set; }
 
     private bool active = true;
@@ -21,6 +24,8 @@ public abstract class Arrow : MonoBehaviour
     private void Start() {
         rbody = GetComponent<Rigidbody2D>();
         Fly();
+
+        Destroy(gameObject, 6f);
     }
 
     private void LateUpdate() {
