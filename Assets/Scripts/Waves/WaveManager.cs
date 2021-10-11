@@ -12,20 +12,13 @@ public class WaveManager : MonoBehaviour
 
     private int waveIndex = -1;
     private float countdown;
-    private bool wavesEnded = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (waveIndex >= wave.Length - 1) {
             countdown = 0;
-            wavesEnded = true;
+            GameManager.WavesEnded = true;
             return;
         }
 

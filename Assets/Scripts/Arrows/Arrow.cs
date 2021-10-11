@@ -6,17 +6,11 @@ using UnityEngine;
 
 public abstract class Arrow : MonoBehaviour
 {
-    [Header("Arrow")]
-    [SerializeField] private float speedMultiplier = 10f;
-
-    [SerializeField] protected int damageToUnits = 25;
-    [SerializeField] protected int damageToBuildings = 5;
-
-    [SerializeField] protected int criticalMultiplier = 2;
-    [SerializeField] protected GameObject criticalEffect;
+    public ArrowSO arrowSO;
 
     public float speed { get; set; }
 
+    [Header("Arrow")]
     private bool active = true;
 
     private Rigidbody2D rbody;
@@ -31,12 +25,12 @@ public abstract class Arrow : MonoBehaviour
     private void LateUpdate() {
         if (active) {
             Vector2 position = new Vector2(transform.position.x, transform.position.y);
-            transform.right = rbody.velocity * speedMultiplier - position;
+            transform.right = rbody.velocity * arrowSO.speedMultiplier - position;
         }
     }
 
     void Fly() {
-        rbody.velocity = transform.right * speed * speedMultiplier;
+        rbody.velocity = transform.right * speed * arrowSO.speedMultiplier;
     }
 
     public void HitGround() {

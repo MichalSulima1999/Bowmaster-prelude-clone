@@ -9,9 +9,9 @@ public class ExplosiveArrow : Arrow
     private void InstantiateExplosion() {
         GameObject explosionInstance = Instantiate(explosion, transform.position, Quaternion.identity);
         Explosion explosionScript = explosionInstance.GetComponent<Explosion>();
-        explosionScript.damageToBuildings = damageToBuildings;
-        explosionScript.damageToUnits = damageToUnits;
-        Destroy(explosionInstance, 0.5f);
+        explosionScript.damageToBuildings = arrowSO.damageToBuildings;
+        explosionScript.damageToUnits = arrowSO.damageToUnits;
+        Destroy(explosionInstance, 0.1f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
