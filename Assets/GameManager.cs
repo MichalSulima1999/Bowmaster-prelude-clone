@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
+
         WavesEnded = false;
 
         InvokeRepeating("GetEnemies", 0f, 0.5f);
@@ -40,25 +42,25 @@ public class GameManager : MonoBehaviour
         if (FriendlyFlagDelivered) {
             Lose();
         }
-    }
-
-    void GetEnemies() {
-        enemies = GameObject.FindGameObjectsWithTag("EnemyUnit");
 
         if (enemies == null && WavesEnded)
             Win();
     }
 
+    void GetEnemies() {
+        enemies = GameObject.FindGameObjectsWithTag("EnemyUnit");
+    }
+
     void Win() {
         Won = true;
-        lostCanvas.SetActive(true);
+        wonCanvas.SetActive(true);
         Debug.Log("You won!");
         Time.timeScale = 0;
     } 
 
     void Lose() {
         Lost = true;
-        wonCanvas.SetActive(true);
+        lostCanvas.SetActive(true);
         Debug.Log("You lost!");
         Time.timeScale = 0;
     }
