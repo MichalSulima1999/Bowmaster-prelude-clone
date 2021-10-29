@@ -8,6 +8,4 @@ public class ShopItemSO : ScriptableObject
     public GameObject itemToBuy;
     public int price = 1000;
     [TextArea] public string description;
-
-    public bool bought = false;
 }

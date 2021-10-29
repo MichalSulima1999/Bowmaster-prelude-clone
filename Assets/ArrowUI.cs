@@ -8,8 +8,9 @@ public class ArrowUI : MonoBehaviour
     [SerializeField] private Arrow arrow;
     [SerializeField] private Image reloadImage;
 
-    [SerializeField] private Sprite normalBackground;
-    [SerializeField] private Sprite activeBackground;
+    [SerializeField] private bool defaultItem;
+
+    private Image image;
 
     private BowManager bowManager;
     private static ArrowUI activeArrowUI;
@@ -18,7 +19,13 @@ public class ArrowUI : MonoBehaviour
     private void Start() {
         arrow.arrowSO.reloadCounter = 0;
 
+        image = GetComponent<Image>();
+
+        
         bowManager = GameObject.FindGameObjectWithTag("Bow").GetComponent<BowManager>();
+
+        if (defaultItem)
+            activeArrowUI = this;
     }
 
     private void Update() {
@@ -26,12 +33,12 @@ public class ArrowUI : MonoBehaviour
 
         reloadImage.fillAmount = Mathf.Max(arrow.arrowSO.reloadCounter / arrow.arrowSO.reloadTime, 0);
 
-        if(activeArrowUI != this)
-            transform.parent.GetComponent<Image>().sprite = normalBackground;
+        if (activeArrowUI != this)
+            image.color = Color.black;
     }
 
     public void UseThisArrow() {
-        transform.parent.GetComponent<Image>().sprite = activeBackground;
+        image.color = Color.white;
 
         activeArrowUI = this;
         bowManager.ChangeArrow(arrow);

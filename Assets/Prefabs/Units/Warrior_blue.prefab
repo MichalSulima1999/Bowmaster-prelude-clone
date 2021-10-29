@@ -386,7 +386,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dieSfx: {fileID: 1208442364080612855, guid: 4b86209dc8ac9544190cf7202791289a, type: 3}
   hpImage: {fileID: 3284441132373802407}
+  attackSFX: {fileID: 8420784404310539723, guid: f7223c443ab7da44b9010ae80e730e76, type: 3}
 --- !u!70 &3284441132525756908
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

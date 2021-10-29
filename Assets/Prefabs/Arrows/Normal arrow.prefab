@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8149349374015133266}
   - component: {fileID: 2698837990593355683}
   m_Layer: 0
-  m_Name: Arrow 1
+  m_Name: Normal arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,6 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowSO: {fileID: 11400000, guid: dd802ac80fbe1d74285bc530ac7c8401, type: 2}
   criticalEffect: {fileID: 8965844519532540756, guid: 9606ab80c83197e4fbf0be485b0c6778, type: 3}
+  playerInventory: {fileID: 11400000, guid: a6bcf1832c3097e4389f20d5514cba2b, type: 2}
+  moneyForHit: 10
 --- !u!50 &8149349374015133266
 Rigidbody2D:
   serializedVersion: 4

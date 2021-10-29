@@ -17,3 +17,5 @@ MonoBehaviour:
   damageToBuildings: 10
   criticalMultiplier: 2
   reloadTime: 1
+  reloadCounter: -0.04
+  hitSFX: {fileID: 3393963220926082585, guid: bc3984bef14dc6647826659a98fcf8aa, type: 3}

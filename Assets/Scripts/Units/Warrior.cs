@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Warrior : Unit {
+    [SerializeField] private GameObject attackSFX;
+
     private RaycastHit2D hitEnemy;
 
     public override void AttackMoment() {
         AttackUnit(hitEnemy.collider.gameObject);
+        GameObject sfx = Instantiate(attackSFX, transform.position, Quaternion.identity);
+        Destroy(sfx, 2f);
     }
 
     public override void AttackUnit(GameObject unit) {

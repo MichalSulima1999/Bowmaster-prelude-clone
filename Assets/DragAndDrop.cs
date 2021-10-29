@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
+    
+    private Canvas canvas;
+    private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+
+    private void Awake() {
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        canvas = FindParentWithTag(gameObject, "PlayerUI").GetComponent<Canvas>();
+    }
+
+    public void OnBeginDrag(PointerEventData eventData) {
+        Debug.Log("OnBeginDrag");
+        canvasGroup.alpha = .6f;
+        canvasGroup.blocksRaycasts = false;
+    }
+
+    public void OnDrag(PointerEventData eventData) {
+        Debug.Log("OnDrag");
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    }
+
+    public void OnEndDrag(PointerEventData eventData) {
+        Debug.Log("OnEndDrag");
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+
+        rectTransform.anchoredPosition = Vector3.zero;
+    }
+
+    public void OnPointerDown(PointerEventData eventData) {
+        Debug.Log("OnPointerDown");
+    }
+
+    public static GameObject FindParentWithTag(GameObject childObject, string tag) {
+        Transform t = childObject.transform;
+        while (t.parent != null) {
+            if (t.parent.tag == tag) {
+                return t.parent.gameObject;
+            }
+            t = t.parent.transform;
+        }
+        return null; // Could not find a parent with given tag.
+    }
+}

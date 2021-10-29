@@ -33,6 +33,8 @@ public abstract class Unit : MonoBehaviour {
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] protected LayerMask groundLayer;
 
+    [SerializeField] protected GameObject dieSfx;
+
     [Header("UI")]
     [SerializeField] private Image hpImage;
 
@@ -133,6 +135,9 @@ public abstract class Unit : MonoBehaviour {
         hpImage.fillAmount = (float)currentHp / (float)maxHp;
 
         animator.Play("Death");
+
+        GameObject sfx = Instantiate(dieSfx, transform.position, Quaternion.identity);
+        Destroy(sfx, 2f);
 
         Destroy(gameObject, 1f);
         gameObject.layer = 0;

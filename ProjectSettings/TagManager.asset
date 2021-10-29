@@ -18,6 +18,11 @@ TagManager:
   - EnemyFlagFollowSpot
   - PlayerBase
   - Head
+  - PlayerUI
+  - ItemUI
+  - PlayerSpawnPoint
+  - GameManager
+  - SaveManager
   layers:
   - Default
   - TransparentFX

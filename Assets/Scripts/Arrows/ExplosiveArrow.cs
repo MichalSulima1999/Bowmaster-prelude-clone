@@ -16,12 +16,16 @@ public class ExplosiveArrow : Arrow
 
     private void OnCollisionEnter2D(Collision2D collision) {
         InstantiateExplosion();
+        arrowSO.PlaySFX(transform);
+
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("EnemyBase")) {
             InstantiateExplosion();
+            arrowSO.PlaySFX(transform);
+
             Destroy(gameObject);
         }
     }

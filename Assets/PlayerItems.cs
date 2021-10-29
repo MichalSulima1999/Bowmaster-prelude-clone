@@ -8,7 +8,7 @@ public class PlayerItems : MonoBehaviour
 
     public Transform GetFreeItemHolder() {
         foreach(Transform itemHolder in itemHolders) {
-            if(itemHolder.childCount < 2) {
+            if(itemHolder.childCount <= 1) {
                 return itemHolder;
             }
         }

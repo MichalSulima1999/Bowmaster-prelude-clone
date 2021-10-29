@@ -14,4 +14,12 @@ public class ArrowSO : ScriptableObject
 
     public float reloadTime = 1f;
     public float reloadCounter;
+
+    public GameObject hitSFX;
+
+    public void PlaySFX(Transform transform) {
+        GameObject sfx = Instantiate(hitSFX, transform.position, Quaternion.identity);
+        Destroy(sfx, 2f);
+    }
+
 }

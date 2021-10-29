@@ -88,9 +88,11 @@ GameObject:
   - component: {fileID: 862368493580281414}
   - component: {fileID: 862368493580281415}
   - component: {fileID: 862368493580281408}
+  - component: {fileID: -5721823243175401618}
+  - component: {fileID: 8539951518710721481}
   m_Layer: 5
   m_Name: ArrowExplosive
-  m_TagString: Untagged
+  m_TagString: ItemUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f51a4fddcb23b504ea98efd4a78b6d76, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 75b67ef792090ad41af65c1a8d53cac7, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -224,9 +226,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 998726184084705580, guid: 25ed836f4f6e47148b8ee64978a662b1, type: 3}
   reloadImage: {fileID: 862368491890712207}
-  bowManager: {fileID: 0}
-  normalBackground: {fileID: 21300000, guid: 78bb032fcc1cf194f8b67b931ab8d72e, type: 3}
-  activeBackground: {fileID: 21300000, guid: 341aeb4e12ad59343a115c49b5e36509, type: 3}
+  defaultItem: 0
+--- !u!225 &-5721823243175401618
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862368493580281410}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &8539951518710721481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862368493580281410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994859d1d12671044859cbb358da98be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1881637880003863963
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,20 +7,29 @@ using UnityEngine.EventSystems;
 public class ShopItem : MonoBehaviour, IPointerEnterHandler
 {
     [SerializeField] ShopItemSO shopItem;
+    [SerializeField] PlayerInventorySO playerInventory;
     [SerializeField] PlayerItems playerItems;
 
     [SerializeField] Text descriptionText;
 
+    private Button button;
+
     private void Start() {
-        shopItem.bought = false; // temp
-    }
+        button = GetComponent<Button>();
+
+        if (playerInventory.isBought(shopItem.itemToBuy)) {
+            button.interactable = false;
+        } else {
+            button.interactable = true;
+        }
+     }
 
     public void BuyItem() {
-        if (!shopItem.bought) {
-            shopItem.bought = true;
+        if (!playerInventory.isBought(shopItem.itemToBuy) && playerInventory.money >= shopItem.price) {
+            button.interactable = false;
             Transform parent = playerItems.GetFreeItemHolder();
-            GameObject boughtItem = Instantiate(shopItem.itemToBuy, parent.position, Quaternion.identity, parent);
-            //boughtItem.transform.position = Vector3.zero;
+            playerInventory.setItemInInventory(shopItem.itemToBuy, parent);
+            playerInventory.boughtItems.Add(shopItem.itemToBuy);
         }
     }
 

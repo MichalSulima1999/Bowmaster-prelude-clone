@@ -9,6 +9,8 @@ public class BowManager : MonoBehaviour
     [SerializeField] private GameObject arrowAnchorPrefab;
     [SerializeField] private GameObject startingArrow;
 
+    [SerializeField] private GameObject bowSFX;
+
     private GameObject arrowModel;
     private GameObject arrowAnchor;
 
@@ -45,6 +47,9 @@ public class BowManager : MonoBehaviour
             if (arrowScript.arrowSO.reloadCounter <= 0) {
                 GameObject arrow = Instantiate(activeArrow, arrowModel.transform.position, arrowModel.transform.rotation);
                 arrow.GetComponent<Arrow>().speed = Vector3.Distance(transform.position, arrowModel.transform.position);
+
+                GameObject sfx = Instantiate(bowSFX, transform.position, Quaternion.identity);
+                Destroy(sfx, 2f);
 
                 arrowScript.arrowSO.reloadCounter = arrowScript.arrowSO.reloadTime;
             }

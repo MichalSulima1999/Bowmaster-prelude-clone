@@ -10,9 +10,13 @@ public class Archer : Unit {
 
     [SerializeField] private GameObject arrow;
     [SerializeField] private Transform fireSpot;
+    [SerializeField] private GameObject attackSFX;
 
     public override void AttackMoment() {
         AttackUnit(attackTarget.gameObject);
+
+        GameObject sfx = Instantiate(attackSFX, transform.position, Quaternion.identity);
+        Destroy(sfx, 2f);
     }
 
     public override void AttackUnit(GameObject unit) {

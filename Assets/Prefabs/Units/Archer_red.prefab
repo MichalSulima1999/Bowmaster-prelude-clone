@@ -417,9 +417,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dieSfx: {fileID: 941497975406392522, guid: ab79de370c730a84883b06fdad78ca40, type: 3}
   hpImage: {fileID: 2987227279868322037}
   arrow: {fileID: 4910960947153050376, guid: 312e5d386b8fe76438b6ed2e2a18d908, type: 3}
   fireSpot: {fileID: 2987227279807347417}
+  attackSFX: {fileID: 1962779255285181605, guid: 2f2e5982bbd0b534498189ac8336d5b0, type: 3}
 --- !u!50 &2987227280398121506
 Rigidbody2D:
   serializedVersion: 4

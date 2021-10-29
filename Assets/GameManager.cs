@@ -35,15 +35,15 @@ public class GameManager : MonoBehaviour
         if (Won || Lost)
             return;
 
-        if (WavesEnded || EnemyFlagDelivered) {
-            Win();
-        }
-
         if (FriendlyFlagDelivered) {
             Lose();
         }
 
-        if (enemies == null && WavesEnded)
+        if (EnemyFlagDelivered) {
+            Win();
+        }
+
+        if (enemies.Length <= 0 && WavesEnded)
             Win();
     }
 

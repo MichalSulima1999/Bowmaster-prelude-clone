@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -10,12 +11,16 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float timeBetweenSpawn = 1f;
     [SerializeField] private float timeBetweenWaves = 15f;
 
+    [SerializeField] private Image waveTimerImage;
+
     private int waveIndex = -1;
     private float countdown;
 
     // Update is called once per frame
     void Update()
     {
+        waveTimerImage.fillAmount = countdown / timeBetweenWaves;
+
         if (waveIndex >= wave.Length - 1) {
             countdown = 0;
             GameManager.WavesEnded = true;
